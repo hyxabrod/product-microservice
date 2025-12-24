@@ -2,31 +2,59 @@ package com.example.product;
 
 public class ProductResponse {
 
-    private final Double price;
-    private final String model;
-    private final String name;
-    private final String brand;
+    private Integer id;
+    private String brand;
+    private String model;
+    private Double price;
 
-    public ProductResponse(Double price, String model, String name, String brand) {
-        this.price = price;
-        this.model = model;
-        this.name = name;
-        this.brand = brand;
+    public ProductResponse() {
     }
 
-    public Double getPrice() {
-        return price;
+    public ProductResponse(Integer id, String brand, String model, Double price) {
+        this.id = id;
+        this.brand = brand;
+        this.model = model;
+        this.price = price;
+    }
+
+    public static ProductResponse fromEntity(Product product) {
+        return new ProductResponse(
+                product.getId(),
+                product.getBrand(),
+                product.getModel(),
+                product.getPrice()
+        );
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getBrand() {
+        return brand;
     }
 
     public String getModel() {
         return model;
     }
 
-    public String getName() {
-        return name;
+    public Double getPrice() {
+        return price;
     }
 
-    public String getBrand() {
-        return brand;
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }

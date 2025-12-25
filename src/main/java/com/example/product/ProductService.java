@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.example.contracts.products.ProductEvent;
 import com.example.product.kafka.ProductEventsProducer;
 
-
 @Service
 public class ProductService {
 
@@ -37,8 +36,7 @@ public class ProductService {
                 saved.getId(),
                 saved.getBrand(),
                 saved.getModel(),
-                saved.getPrice()
-        );
+                saved.getPrice());
 
         productEventsProducer.publish(event);
 
@@ -53,10 +51,8 @@ public class ProductService {
         try {
             return productRepository.findById(id)
                     .<ResponseEntity<?>>map(product -> ResponseEntity.ok(ProductDto.fromEntity(product)))
-                    .orElseGet(()
-                            -> ResponseEntity.status(HttpStatus.NOT_FOUND)
-                            .body(new ErrorResponse("Product not found"))
-                    );
+                    .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND)
+                            .body(new ErrorResponse("Product not found")));
         } catch (DataAccessException ex) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Map.of("error", "Database access error"));

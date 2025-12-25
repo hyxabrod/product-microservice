@@ -27,8 +27,7 @@ public class ProductController {
                 saved.getId(),
                 saved.getBrand(),
                 saved.getModel(),
-                saved.getPrice()
-        );
+                saved.getPrice());
         return ResponseEntity.ok(response);
     }
 
@@ -37,11 +36,10 @@ public class ProductController {
         List<ProductResponse> list = service.getAllFromDb()
                 .stream()
                 .map(p -> new ProductResponse(
-                p.getId(),
-                p.getBrand(),
-                p.getModel(),
-                p.getPrice()
-        ))
+                        p.getId(),
+                        p.getBrand(),
+                        p.getModel(),
+                        p.getPrice()))
                 .toList();
         return ResponseEntity.ok(list);
     }

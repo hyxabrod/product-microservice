@@ -1,4 +1,4 @@
-package com.example.product;
+package com.example.product.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,7 +19,7 @@ public class Product {
     private String name;
     private String brand;
 
-    protected Product() {
+    public Product() {
     }
 
     public Product(Double price, String model, String name, String brand) {

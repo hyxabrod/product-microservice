@@ -1,16 +1,15 @@
-package com.example.product;
+package com.example.product.service;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
-import org.springframework.dao.DataAccessException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.contracts.products.ProductEvent;
+import com.example.product.dto.ProductDto;
 import com.example.product.kafka.ProductEventsProducer;
+import com.example.product.model.Product;
+import com.example.product.repository.ProductRepository;
 
 @Service
 public class ProductService {
@@ -47,15 +46,7 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public ResponseEntity<?> getById(@PathVariable int id) {
-        try {
-            return productRepository.findById(id)
-                    .<ResponseEntity<?>>map(product -> ResponseEntity.ok(ProductDto.fromEntity(product)))
-                    .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND)
-                            .body(new ErrorResponse("Product not found")));
-        } catch (DataAccessException ex) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(Map.of("error", "Database access error"));
-        }
+    public Optional<Product> getById(int id) {
+        return productRepository.findById(id);
     }
 }

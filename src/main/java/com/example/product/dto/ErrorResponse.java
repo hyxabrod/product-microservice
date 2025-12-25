@@ -1,4 +1,4 @@
-package com.example.product;
+package com.example.product.dto;
 
 public class ErrorResponse {
 

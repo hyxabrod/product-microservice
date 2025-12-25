@@ -1,4 +1,6 @@
-package com.example.product;
+package com.example.product.dto;
+
+import com.example.product.model.Product;
 
 public class ProductResponse {
 
@@ -22,8 +24,7 @@ public class ProductResponse {
                 product.getId(),
                 product.getBrand(),
                 product.getModel(),
-                product.getPrice()
-        );
+                product.getPrice());
     }
 
     public Integer getId() {
